@@ -1,65 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>4-Digit Lock</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:40px;background:#f7f9fc;color:#111}
-    .card{max-width:420px;margin:0 auto;background:white;padding:20px;border-radius:12px;box-shadow:0 8px 30px rgba(20,30,50,.06)}
-    h1{font-size:1.2rem;margin:0 0 8px}
-    p{margin:6px 0 14px;color:#444}
-    input[type="text"]{width:100%;font-size:1.4rem;padding:10px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box}
-    button{margin-top:12px;padding:10px 14px;border-radius:8px;border:0;background:#2563eb;color:white;font-size:1rem;cursor:pointer}
-    .msg{margin-top:12px;padding:10px;border-radius:8px;display:none}
-    .success{background:#ecfdf5;border:1px solid #bbf7d0;color:#065f46}
-    .fail{background:#fff1f2;border:1px solid #fca5a5;color:#7f1d1d}
-    .small{font-size:0.85rem;color:#666;margin-top:8px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4-Digit Lock</title>
+<style>
+  body { font-family:sans-serif; text-align:center; margin-top:10%; background:#f5f7fa; }
+  input { font-size:1.5rem; width:6rem; text-align:center; }
+  button { font-size:1rem; margin-left:0.5rem; }
+  #msg { margin-top:1rem; font-weight:bold; }
+</style>
 </head>
 <body>
-  <div class="card" role="main" aria-labelledby="title">
-    <h1 id="title">Enter 4-digit code</h1>
-    <p>Type the code (numbers only) and press Unlock.</p>
-
-    <!-- Single input for easier typing on Chromebooks/mobile -->
-    <input id="codeInput" type="text" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="____" aria-label="4 digit code">
-    <button id="unlockBtn">Unlock</button>
-
-    <div id="successMsg" class="msg success" role="status" aria-live="polite">🎉 Correct — proceed to the next clue.</div>
-    <div id="failMsg" class="msg fail">Incorrect code. Try again.</div>
-
-    <div class="small">Tip: change the code in the script (variable <code>correctCode</code>).</div>
-  </div>
+  <h2>Enter the 4-digit code</h2>
+  <input id="code" maxlength="4" placeholder="----">
+  <button onclick="check()">Unlock</button>
+  <div id="msg"></div>
 
 <script>
-  // *** SET YOUR CODE HERE ***
-  const correctCode = "3434"; // <-- replace with your 4-digit code
-
-  const input = document.getElementById('codeInput');
-  const btn = document.getElementById('unlockBtn');
-  const s = document.getElementById('successMsg');
-  const f = document.getElementById('failMsg');
-
-  function showSuccess(){ f.style.display='none'; s.style.display='block'; }
-  function showFail(){ s.style.display='none'; f.style.display='block'; }
-
-  btn.addEventListener('click', () => {
-    const v = (input.value || "").trim();
-    if (v === correctCode) {
-      showSuccess();
-      // optional: redirect after success
-      // window.location.href = "https://example.com/next-clue";
-    } else {
-      showFail();
-      input.focus();
-    }
-  });
-
-  // allow pressing Enter to submit
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') btn.click();
-  });
+  const correct = "1738"; // ← change your code here
+  function check() {
+    const code = document.getElementById("code").value.trim();
+    const msg = document.getElementById("msg");
+    if (code === correct) msg.textContent = "✅ Correct! this is your final clue, you did amazing baby https://youtu.be/SiJie3Z7DG8?list=RDSiJie3Z7DG8&t=129 ";
+    else msg.textContent = "❌ Incorrect, try again baby.";
+  }
 </script>
 </body>
 </html>
